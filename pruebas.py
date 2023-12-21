@@ -50,14 +50,14 @@ class Burritos:
         pedido = orden(asa=self.asa, des=self.des, coch=self.coch)
         #Orden por escrito
         temp = f"Asada: {self.asa} Cochinita: {self.coch} Deshebrada: {self.des} Total: {pedido} Número de orden {self.numpedido}"
-        #Agregar orden a la lista de ordenes
-        self.ordenes.append(temp)
         #Establecer número de pedido
         self.numpedido += 1
         #Agregar a la listas
             #Lista pedidos (activos y v. numérica)
         ordenes_activas.insert(tk.END, f'Asada: {self.asa} Cochinita: {self.coch} Deshebrada: {self.des} Total: {pedido}  Número de orden: {self.numpedido}')
         self.lista.append([self.asa, self.coch, self.des, pedido])
+            #Agregar orden a la lista de ordenes
+        self.ordenes.append(temp)
             #listas de burros
         self.lista_asa.append(self.asa)
         self.lista_coch.append(self.coch)
@@ -68,7 +68,9 @@ class Burritos:
         index = ordenes_activas.curselection()
         if index:
             selected = ordenes_activas.get(index)
+            #var para num de pedido de la lista v. numérica
             n_pedido = int(index[-1])
+            #Usando la v. numérica para sumarle la modificación y manteniendo el mismo num de pedido
             edited = f"Asada: {self.lista[n_pedido][0] + self.asa} Cochinita: {self.lista[n_pedido][1] + self.coch} Deshebrada: {self.lista[n_pedido][2] + self.des} Total: {self.lista[n_pedido][3] + orden(asa=self.asa, des=self.des, coch=self.coch)}  Número de orden: {n_pedido + 1}"
             ordenes_activas.delete(index)
             ordenes_activas.insert(index, edited)
